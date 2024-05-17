@@ -1,0 +1,51 @@
+.app-container {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.search-bar {
+  margin: 20px 0;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  background-color: #ff4500;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.image-card {
+  position: relative;
+}
+
+.image-card img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.loading {
+  font-size: 24px;
+  margin: 20px;
+}
+h1 {
+  color: #767676;
+}

@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import SearchBar from "./components/SearchBar";
+import ImageGrid from "./components/ImageGrid";
+import "./styles.css";
 
-function App() {
+const App = () => {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchImages = async (searchTerm) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        "https://api.unsplash.com/search/photos",
+        {
+          params: { query: searchTerm },
+          headers: {
+            Authorization:
+              "Client-ID _Azg1QdBDx11aVz9FDK-mO4DeBYHeUFoiAFDMAhPOa4",
+          },
+        }
+      );
+      setImages(response.data.results);
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    }
+    setLoading(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <h1>Image-Search App</h1>
+      <SearchBar onSearch={fetchImages} />
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <ImageGrid images={images} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
